@@ -14,10 +14,10 @@ public class ProjectController extends AbstractModelController<Project> {
     protected CompanyDAO companyDAO;
     protected CustomerDAO customerDAO;
 
-    public ProjectController(GenericDAO<Project, Long> dao) {
+    public ProjectController(GenericDAO<Project, Long> dao, CompanyDAO companyDAO, CustomerDAO customerDAO) {
         super(dao);
-        this.companyDAO = companyDAO;
-        this.customerDAO = customerDAO;
+        this.companyDAO = this.companyDAO;
+        this.customerDAO = this.customerDAO;
     }
 
     @Override

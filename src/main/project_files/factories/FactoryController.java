@@ -38,7 +38,7 @@ public final class FactoryController {
 
     public static ProjectController getProjectController() throws SQLException {
         if (projectController == null) {
-            projectController = new ProjectController(FactoryDAO.getProjectDAO());
+            projectController = new ProjectController(FactoryDAO.getProjectDAO(), HibernateFactoryDAO.getCompanyDAO(), HibernateFactoryDAO.getCustomerDAO());
         }
         return projectController;
     }

@@ -1,17 +1,55 @@
 package main.project_files.models;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
+@Table(name = "developers", schema = "public")
 public class Developer implements Model {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "fname", nullable = false)
     private String fname;
+
+    @Column(name = "lname", nullable = false)
     private String lname;
+
+    @Column(name = "salary")
     private double salary;
 
+    @ManyToOne(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
+    @JoinColumn(name = "company_id")
     private Company company;
+
+    @ManyToOne(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
+    @JoinColumn(name = "project_id")
     private Project project;
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    },fetch = FetchType.EAGER)
+    @JoinTable(name = "developers_skills",
+    joinColumns = {@JoinColumn(name = "developer_id")},
+    inverseJoinColumns = {@JoinColumn(name = "skill_id")}
+    )
     private Set<Skill> skills = new HashSet<Skill>();
 
 

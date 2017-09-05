@@ -1,8 +1,18 @@
 package main.project_files.models;
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "companies")
 public class Company implements Model {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "title")
     private String title;
 
     public Company() {

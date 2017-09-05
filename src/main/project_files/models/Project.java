@@ -1,13 +1,28 @@
 package main.project_files.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "projects", schema = "public")
 public class Project implements Model {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
+
+    @Column(name = "title", nullable = false)
     private String title;
+
+    @Column(name = "cost")
     private int cost;
 
-
+    @ManyToOne
+    @JoinColumn(name = "company_id")
     private Company company;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     public Project() {
